@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscription - Golden Gate Community Center</title>
+    <link rel="stylesheet" href="../css/payment.css">
+</head>
+<body>
+
+<div class="navbar">
+    <a href="post_main.html">Home</a>
+</div>
+
+<div class="body_content">
+    <div class="subscription-page">
+        <div class="form">
+            <form class="subscription-form" method="POST">
+                <h2>Payment</h2>
+                <a href="#" id="apple-pay"><img src="../images/apple-pay-og-twitter-removebg-preview.png"></a>
+                <div>
+                    <label for="name">Full name</label>
+                    <input type="name" placeholder="Full Name *" id="name" required/>
+                    <label for="country">Country</label>
+                    <input type="country" placeholder="Enter Country *" id="country" required/>
+                    <label for="address">Address</label>
+                    <input type="address" placeholder="Street Address *" id="address" required/>
+                    <label for="security-code">Card Number</label>
+                    <input type="card" placeholder="Card Number *" id="card" required/>
+                    <div id="checkbox-format">
+                </div>
+                
+                    <div>
+                        <label for="email-promotion">Expiration Date</label>
+                        <input type="expiration" placeholder="MM/YY" id="expiration"></input>
+                    </div>
+                    <div>
+                        <label for="security-code">Security Code</label>
+                        <input type="security-code" placeholder="CVV" id="security-code"></input>
+                        
+                    </div>
+                </div>
+                <button type="submit" class="btn" id="subscribe-button">Confirm</button>
+                <a href="data_collection.html">Data Collection</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
