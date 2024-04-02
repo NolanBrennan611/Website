@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup - Golden Gate Community Center</title>
+    <link rel="stylesheet" href="../css/signup.css">
+</head>
+<body>
+
+<div class="navbar">
+    <a href="post_main.html">Home</a>
+    <div class="navbar-right">
+        <a href="main.html">Log Out</a>
+    </div>
+</div>
+
+<div class="body_content">
+    <div class="login-page">
+        <div class="form">
+            <form class="data-form" method="POST">
+                <h2>Data Collection</h2>
+                <input type="text" placeholder="Avg Heart Rate *" id="avg-heart-rate" required/>
+                <input type="text" placeholder="Current Heart Rate *" id="current-heart-rate" required>
+                <input type="text" placeholder="Blood Pressure *" id="blood-pressure" required>
+                <input type="text" placeholder="Glucose Level *" id="glucose-level" required>
+                <label for="ekg">Submit an EKG Reading:</label>
+                <input type="file" id="ekg" name="ekg">
+                <button type="submit" class="btn" id="submit-button">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

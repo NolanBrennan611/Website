@@ -7,11 +7,13 @@ const {mongo_uri, cookieSecret} = require(__dirname + "/credentials.json");
 const app = express();
 const port = 8080;
 
-const {UserModel, DataModel} = require("./Models/mainModel")
+const {UserModel, DataModel} = require("./models/mainModel")
 
-app.use(session({
-    secret: cookieSecret
-}))
+app.use(express.static(__dirname + '/public'));
+
+app.get("/", (req, res) => {
+    res.sendFile(__dirname + "/public/main.html");
+});
 
 //need to add input sanitization 
 app.route("/signup")
@@ -33,11 +35,11 @@ app.route("/signup")
                 res.redirect("/subpage")
             } else {
                 console.log("Failed Email or Password")
-                res.render("html/signup.html", {browsertitle: "Sign Up"})
+                res.render("/public/signup.html", {browsertitle: "Sign Up"})
             }
         }  else {
             console.log("Failed Email or Password")
-            res.render("/html/signup.html", {browsertitle: "Sign Up"})
+            res.render("/public/signup.html", {browsertitle: "Sign Up"})
         }
     })
 
@@ -58,7 +60,7 @@ app.post("/loginHandler", async (req, res) => {
 app.route("/formHandler")
     .get((req, res) => {
         console.log("Form Data: ", req.body);
-        res.render("subpage", {filter:"none"})
+        res.render("/public/post_main.html", {filter:"none"})
     })
     .post((req, res) => {
         let response = "";
@@ -73,7 +75,7 @@ app.route("/formHandler")
                     validFields[valid_name] = value;
                 } else {
                     console.log("Invalid Field or Data Entry.");
-                    res.render("/html/signup.html", {browsertitle: "Sign Up"})
+                    res.render("/public/signup.html", {browsertitle: "Sign Up"})
                 }
             })
         })
@@ -85,7 +87,7 @@ app.route("/formHandler")
 
         form.parse(req);
         console.log("Successfully Placed in the Cloud")
-        res.render("/html/data_collection.html", {browsertitle: "Golden Circles Community Centre"})
+        res.render("/public/data_collection.html", {browsertitle: "Golden Circles Community Centre"})
     
     });
 
