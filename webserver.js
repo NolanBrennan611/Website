@@ -32,12 +32,12 @@ app.route("/signup")
 
                 res.redirect("/subpage")
             } else {
-                console.log("Failed Password")
-                res.render("views/signup.njk", {browsertitle: "Sign Up"})
+                console.log("Failed Email or Password")
+                res.render("html/signup.html", {browsertitle: "Sign Up"})
             }
         }  else {
-            console.log("Failed Email")
-            res.render("views/signup.njk", {browsertitle: "Sign Up"})
+            console.log("Failed Email or Password")
+            res.render("/html/signup.html", {browsertitle: "Sign Up"})
         }
     })
 
@@ -50,8 +50,6 @@ app.post("/loginHandler", async (req, res) => {
         })
         console.log(req.body);
         res.send(req.body);
-    } else {
-        console.log("password didnt match")
     }
     
 });
@@ -75,49 +73,10 @@ app.route("/formHandler")
                     validFields[valid_name] = value;
                 } else {
                     console.log("Invalid Field or Data Entry.");
-                    res.render("views/signup.njk", {browsertitle: "Sign Up"})
+                    res.render("/html/signup.html", {browsertitle: "Sign Up"})
                 }
             })
         })
-
-        //a part is any form entry that is a file
-        form.on("part", (part) => {
-            console.log(part);
-            if(part.headers["content-type"] !== "application/octet-stream") { //if they submitted nothing, no point in continuing
-                if(part.headers["content-type"] !== "image/jpeg"){            //if it is not jpeg, it must be png
-                    if(part.headers["content-type"] !== "image/png"){         //if it is not a png, send that it is invalid.
-                        res.status(418);
-                        response = "invalid file type";
-                        //tells the parser to continue without reading out this part
-                        part.resume();
-                        return
-                    }
-                }
-            }
-
-            //make sure that part is of valid name
-            if(part.name !== "product_image"){
-                //tells part to continue
-                part.resume();
-                return
-            }
-
-            //3mb max image
-            if(part.byteCount > 3000000){
-                part.resume();
-                //update response for final return
-                response = "File too large";
-                return
-            } else if (part.byteCount === 0) {
-                part.resume();
-            }
-
-            //good case
-            //pipe file to server directory with given file name
-            part.pipe(fs.createWriteStream(path.join("./public/uploaded-review-images", part.filename)))
-            response = `File with name ${part.filename} saved`;
-            
-        });
 
         //after the form is closed, send response to client
         form.on("close", () => {
@@ -126,7 +85,8 @@ app.route("/formHandler")
 
         form.parse(req);
         console.log("Successfully Placed in the Cloud")
-        res.render("views/main.njk", {browsertitle: "Golden Circles Community Centre"})
+        res.render("/html/data_collection.html", {browsertitle: "Golden Circles Community Centre"})
+    
     });
 
 app.listen(port, () =>{
