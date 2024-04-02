@@ -1,14 +1,13 @@
 const express = require("express");
 const multiparty = require("multiparty");
 const mongodb = require("mongodb");
-const mongoose = require("mongoose");
 const expressWs = require("express-ws");
 const session = require("express-session")
 const {mongo_uri, cookieSecret} = require(__dirname + "/credentials.json");
 const app = express();
-const port = 3000;
+const port = 8080;
 
-const {UserModel, DataModel} = require("./models/mainModel")
+const {UserModel, DataModel} = require("./Models/mainModel")
 
 app.use(session({
     secret: cookieSecret
